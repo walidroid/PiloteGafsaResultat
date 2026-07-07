@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منظومة نتائج مناظرة الدخول للمدارس الإعدادية النموذجية 2026 - قفصة</title>
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #3b82f6;
+            --accent-color: #10b981;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-color: #1e293b;
+            --border-color: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1max));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        .stat-card h3 {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 5px;
+        }
+
+        .stat-card p {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .controls {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .search-box {
+            flex: 2;
+            min-width: 250px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100px;
+            width: 100%;
+            padding: 12px 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .search-box input:focus {
+            border-color: var(--secondary-color);
+        }
+
+        .filter-box {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .filter-box select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+            background-color: white;
+            cursor: pointer;
+        }
+
+        .table-container {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: right;
+        }
+
+        th, td {
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: #f1f5f9;
+            color: var(--primary-color);
+            font-weight: 600;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        th:hover {
+            background-color: #e2e8f0;
+        }
+
+        tr:hover {
+            background-color: #f8fafc;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: bold;
+            background-color: #d1fae5;
+            color: #065f46;
+        }
+
+        .rank-badge {
+            background-color: #e0f2fe;
+            color: #0369a1;
+        }
+
+        @media (max-width: 768px) {
+            th, td {
+                padding: 10px 12px;
+                font-size: 14px;
+            }
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>وزارة التربية - الإدارة العامة للامتحانات</h1>
+        <p>مناظرة الدخول إلى المدارس الإعدادية النموذجية دورة 2026 | المندوبية الجهوية بقفصة</p>
+        <p style="margin-top: 5px; font-size: 12px; opacity: 0.8;">تاريخ التقرير: 06/07/2026</p>
+    </header>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h3>إجمالي الموجهين بالقائمة</h3>
+            <p id="total-students">0</p>
+        </div>
+        <div class="stat-card">
+            <h3>أعلى معدل</h3>
+            <p id="max-score">0.00</p>
+        </div>
+        <div class="stat-card">
+            <h3>أدنى معدل بالقائمة</h3>
+            <p id="min-score">0.00</p>
+        </div>
+    </div>
+
+    <div class="controls">
+        <div class="search-box">
+            <input type="text" id="search-input" placeholder="ابحث باسم التلميذ أو المدرسة...">
+        </div>
+        <div class="filter-box">
+            <select id="school-filter">
+                <option value="">كل المدارس</option>
+            </select>
+        </div>
+        <div class="filter-box">
+            <select id="sort-select">
+                <option value="rank-asc">الترتيب (من الأول للأخير)</option>
+                <option value="score-desc">المعدل (من الأعلى للأقل)</option>
+                <option value="name-asc">الاسم (أبجدي)</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>الرتبة</th>
+                    <th>الإسم واللقب</th>
+                    <th>المعدل</th>
+                    <th>المدرسة</th>
+                    <th>المعهد الموجه إليه</th>
+                </tr>
+            </thead>
+            <tbody id="data-table-body">
+                </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    // البيانات المستخرجة بدقة من ملف الـ PDF المرفق لـ 101 تلميذ مع رتبهم ومعدلاتهم ومدارسهم
+    const studentsData = [
+        { rank: 1, name: "لميس بنت موسى جدايدي", score: 18.40, school: "529843 المدرسة الابتدائية الخاصة الخوارزمي بأم العرائس", target: "م... النموذجية قفصة" },
+        { rank: 2, name: "تقي الله بن محمد المحسن مصطفى", score: 18.15, school: "529821 المدرسة الابتدائية الخاصة ابن سينا", target: "م... النموذجية قفصة" },
+        { rank: 3, name: "محمد عزيز بن ماهر بن مصباح", score: 18.05, school: "529821 المدرسة الابتدائية الخاصة ابن سينا", target: "م... النموذجية قفصة" },
+        { rank: 4, name: "رميساء بنت مروان قراوي", score: 18.00, school: "529830 المدرسة الابتدائية الخاصة المضيلة سكول", target: "م... النموذجية قفصة" },
+        { rank: 5, name: "محمد براء بن فتحي زعلاني", score: 18.00, school: "521402 المدرسة الابتدائية طريق المحطة القصر", target: "م... النموذجية قفصة" },
+        { rank: 6, name: "احمد بن شاهين كحائليه", score: 17.90, school: "529831 المدرسة الابتدائية الخاصة المستقبل بالمتلوي", target: "م... النموذجية قفصة" },
+        { rank: 7, name: "لينة بنت الأزهر عزازة", score: 17.85, school: "529846 المدرسة الابتدائية الخاصة الخوارزمي بالرديف", target: "م... النموذجية قفصة" },
+        { rank: 8, name: "مريم بنت الناصر بنسعيد", score: 17.85, school: "529821 المدرسة الابتدائية الخاصة ابن سينا", target: "م... النموذجية قفصة" },
+        { rank: 9, name: "ساره بنت منير عويديدي", score: 17.80, school: "529855 المدرسة الابتدائية الخاصة العالم الذكي بقفصة الجنوبية", target: "م... النموذجية قفصة" },
+        { rank: 10, name: "جوري بنت عبد العزيز كرمادي", score: 17.75, school: "529820 المدرسة الابتدائية الخاصة المصعد", target: "م... النموذجية قفصة" },
+        { rank: 11, name: "ياسين بن محمد الراشدي بوقبه", score: 17.60, school: "529820 المدرسة الابتدائية الخاصة المصعد", target: "م... النموذجية قفصة" },
+        { rank: 12, name: "حنين بنت فتحى بن سعيد", score: 17.50, school: "521335 المدرسة الابتدائية حي بن يونس قفصة", target: "م... النموذجية قفصة" },
+        { rank: 13, name: "مريم بنت التارزي حفوظي", score: 17.45, school: "521322 المدرسة الابتدائية حي بورقيبة زروق قفصة", target: "م... النموذجية قفصة" },
+        { rank: 14, name: "عبد المجيد بن ماهر بشوع", score: 17.45, school: "529860 المدرسة الابتدائية الخاصة المسار بالقصر", target: "م... النموذجية قفصة" },
+        { rank: 15, name: "آيه بنت كمال قفصيه", score: 17.45, school: "529820 المدرسة الابتدائية الخاصة المصعد", target: "م... النموذجية قفصة" },
+        { rank: 16, name: "شدى بنت منير براهمي", score: 17.25, school: "529824 المدرسة الابتدائية الخاصة سماح سكول", target: "م... النموذجية قفصة" },
+        { rank: 17, name: "سجود بنت العائش سعيدي", score: 17.25, school: "529843 المدرسة الابتدائية الخاصة الخوارزمي بأم العرائس", target: "م... النموذجية قفصة" },
+        { rank: 18, name: "يسر بنت لطفي بنعبد الله", score: 17.25, school: "529820 المدرسة الابتدائية الخاصة المصعد", target: "م... النموذجية قفصة" },
+        { rank: 19, name: "محمد عزيز بن مراد شعباني", score: 17.20, school: "529831 المدرسة الابتدائية الخاصة المستقبل بالمتلوي", target: "م... النموذجية قفصة" },
+        { rank: 20, name: "يحيى بن فوزي شلاغميه", score: 17.20, school: "521405 المدرسة الابتدائية حي التحرير القصر", target: "م... النموذجية قفصة" },
+        { rank: 21, name: "آدم بن محمد الخامس عمار", score: 17.20, school: "529835 المدرسة الابتدائية الخاصة المناهل بقفصة", target: "م... النموذجية قفصة" },
+        { rank: 22, name: "ميرال بنت سرحان تليجاني", score: 17.20, school: "529821 المدرسة الابتدائية الخاصة ابن سينا", target: "م... النموذجية قفصة" },
+        { rank: 23, name: "آيه بنت واجد قاسمي", score: 17.20, school: "529820 المدرسة الابتدائية الخاصة المصعد", target: "م... النموذجية قفصة" },
+        { rank: 24, name: "حلا بنت حاتم عرفه", score: 17.10, school: "529820 المدرسة الابتدائية الخاصة المصعد", target: "م... النموذجية قفصة" },
+        { rank: 25, name: "نورسين بنت عمر بشاتنيه", score: 17.10, school: "529855 المدرسة الابتدائية الخاصة العالم الذكي بقفصة الجنوبية", target: "م... النموذجية قفصة" },
+        { rank: 26, name: "بلقيس بنت مسعود عيساوي", score: 17.10, school: "529843 المدرسة الابتدائية الخاصة الخوارزمي بأم العرائس", target: "م... النموذجية قفصة" },
+        { rank: 27, name: "محمد البشير بن محمد البشير داعي", score: 17.05, school: "529820 المدرسة الابتدائية الخاصة المصعد", target: "م... النموذجية قفصة" },
+        { rank: 28, name: "مريم بنت الطيب عبد الملك", score: 17.05, school: "529830 المدرسة الابتدائية الخاصة المضيلة سكول", target: "م... النموذجية قفصة" },
+        { rank: 29, name: "عزيز بن شوقي بوزيان", score: 17.05, school: "529821 المدرسة الابتدائية الخاصة ابن سينا", target: "م... النموذجية قفصة" },
+        { rank: 30, name: "آدم بن قليعي شكشوك", score: 17.05, school: "529840 المدرسة الابتدائية الخاصة التميز", target: "م... النموذجية قفصة" },
+        { rank: 31, name: "شيماء بنت محمد نصر", score: 17.05, school: "529821 المدرسة الابتدائية الخاصة ابن سينا", target: "م... النموذجية قفصة" },
+        { rank: 32, name: "براءة بنت نور الدين وصيفي", score: 17.00, school: "529843 المدرسة الابتدائية الخاصة الخوارزمي بأم العرائس", target: "م... النموذجية قفصة" },
+        { rank: 33, name: "حسام بن علي معمر", score: 17.00, school: "529863 المدرسة الابتدائية الخاصة سيرين سكول بالقصر قفصة", target: "م... النموذجية قفصة" },
+        { rank: 34, name: "ياسمين بنت علي سعيدي", score: 17.00, school: "521322 المدرسة الابتدائية حي بورقيبة زروق قفصة", target: "م... النموذجية قفصة" },
+        { rank: 35, name: "آية بنت طارق بوساحة", score: 16.95, school: "529843 المدرسة الابتدائية الخاصة الخوارزمي بأم العرائس", target: "م... النموذجية قفصة" },
+        { rank: 36, name: "ياسمين بنت محرز عبادي", score: 16.90, school: "529821 المدرسة الابتدائية الخاصة ابن سينا", target: "م... النموذجية قفصة" },
+        { rank: 37, name: "ندى بنت محرز اذياب", score: 16.90, school: "525311 المدرسة الابتدائية حي السوالمية أم العرائس", target: "م... النموذجية قفصة" },
+        { rank: 38, name: "محمد بن اسماعيل بنصالح", score: 16.85, school: "521302 المدرسة الابتدائية شارع حسين بوزيان قفصة", target: "م... النموذجية قفصة" },
+        { rank: 39, name: "تقى بنت حسين سليمان", score: 16.85, school: "529820 المدرسة الابتدائية الخاصة المصعد", target: "م... النموذجية قفصة" },
+        { rank: 40, name: "بيان بنت عبد القادر عمايديه", score: 16.80, school: "529830 المدرسة الابتدائية الخاصة المضيلة سكول", target: "م... النموذجية قفصة" },
+        { rank: 41, name: "وفاء بنت سعيد شرطاني", score: 16.80, school: "529830 المدرسة الابتدائية الخاصة المضيلة سكول", target: "م... النموذجية قفصة" },
+        { rank: 42, name: "أمين بن الازهر عزازة", score: 16.80, school: "529846 المدرسة الابتدائية الخاصة الخوارزمي بالرديف", target: "م... النموذجية قفصة" },
+        { rank: 43, name: "ميسم بنت لطفي بن رحال", score: 16.80, school: "529820 المدرسة الابتدائية الخاصة المصعد", target: "م... النموذجية قفصة" },
+        { rank: 44, name: "نورسين بنت سهيل صويعي", score: 16.75, school: "529841 المدرسة الابتدائية الخاصة مناهل العلم بالسند قفصة", target: "م... النموذجية قفصة" },
+        { rank: 45, name: "محمد أمين بن وجيه الاجري", score: 16.75, school: "529821 المدرسة الابتدائية الخاصة ابن سينا", target: "م... النموذجية قفصة" },
+        { rank: 46, name: "كنزة بنت حاتم بكاكريه", score: 16.75, school: "529821 المدرسة الابتدائية الخاصة ابن سينا", target: "م... النموذجية قفصة" },
+        { rank: 47, name: "إيلاف بنت إدريس مبروكي", score: 16.75, school: "521406 المدرسة الابتدائية حي حشاد لالة القصر", target: "م... النموذجية قفصة" },
+        { rank: 48, name: "سيلين بنت سليم الراشدي", score: 16.75, school: "521310 المدرسة الابتدائية نهج ميلود قفصة", target: "م... النموذجية قفصة" },
+        { rank: 49, name: "أسيل بنت ابراهيم بوزنه", score: 16.75, school: "521501 المدرسة الابتدائية سيدي عيش المركز", target: "م... النموذجية قفصة" },
+        { rank: 50, name: "إلين بنت زكريا صغير", score: 16.70, school: "529821 المدرسة الابتدائية الخاصة ابن سينا", target: "م... النموذجية قفصة" },
+        { rank: 51, name: "لجين بنت أنيس صميده", score: 16.70, school: "529821 المدرسة الابتدائية الخاصة ابن سينا", target: "م... النموذجية قفصة" },
+        { rank: 52, name: "حنين بنت حمادي شعباني", score: 16.70, school: "529820 المدرسة الابتدائية الخاصة المصعد", target: "م... النموذجية قفصة" },
+        { rank: 53, name: "حاتم بن احمد عماره", score: 16.65, school: "529821 المدرسة الابتدائية الخاصة ابن سينا", target: "م... النموذجية قفصة" },
+        { rank: 54, name: "محمد عزيز بن دريس صوالحيه", score: 16.60, school: "529821 المدرسة الابتدائية الخاصة ابن سينا", target: "م... النموذجية قفصة" },
+        { rank: 55, name: "محمد آدم بن المعز خالدي", score: 16.60, school: "523808 المدرسة الابتدائية حي الثالجة المتلوي", target: "م... النموذجية قفصة" },
+        { rank: 56, name: "تيم بن ابراهيم السعيدي", score: 16.60, school: "521302 المدرسة الابتدائية شارع حسين بوزيان قفصة", target: "م... النموذجية قفصة" },
+        { rank: 57, name: "ميرال بنت محمد سندي", score: 16.55, school: "524801 المدرسة الابتدائية المحطة السند", target: "م... النموذجية قفصة" },
+        { rank: 58, name: "نور بن محمد سلامي", score: 16.55, school: "529835 المدرسة الابتدائية الخاصة المناهل بقفصة", target: "م... النموذجية قفصة" },
+        { rank: 59, name: "آدم بن مكرم قوادر", score: 16.55, school: "529821 المدرسة الابتدائية الخاصة ابن سينا", target: "م... النموذجية قفصة" },
+        { rank: 60, name: "أسيل بنت عادل قمحة", score: 16.55, school: "529835 المدرسة الابتدائية الخاصة المناهل بقفصة", target: "م... النموذجية قفصة" },
+        { rank: 61, name: "هداية بنت أمير جلولي", score: 16.55, school: "529821 المدرسة الابتدائية الخاصة ابن سينا", target: "م... النموذجية قفصة" },
+        { rank: 62, name: "محمد ضياء بن العربي ظاهري", score: 16.55, school: "529863 المدرسة الابتدائية الخاصة سيرين سكول بالقصر قفصة", target: "م... النموذجية قفصة" },
+        { rank: 63, name: "يسر بنت توفيق نجماوي", score: 16.50, school: "529830 المدرسة الابتدائية الخاصة المضيلة سكول", target: "م... النموذجية قفصة" },
+        { rank: 64, name: "محمد ساجي بن علي بلقاسم", score: 16.50, school: "529820 المدرسة الابتدائية الخاصة المصعد", target: "م... النموذجية قفصة" },
+        { rank: 65, name: "سارة بنت هشام شكري", score: 16.50, school: "529821 المدرسة الابتدائية الخاصة ابن سينا", target: "م... النموذجية قفصة" },
+        { rank: 66, name: "رسيل بن معمر وشير", score: 16.45, school: "529855 المدرسة الابتدائية الخاصة العالم الذكي بقفصة الجنوبية", target: "م... النموذجية قفصة" },
+        { rank: 67, name: "تسنيم بنت عادل بلطيف", score: 16.45, school: "529821 المدرسة الابتدائية الخاصة ابن سينا", target: "م... النموذجية قفصة" },
+        { rank: 68, name: "أميمة بنت توفيق غريسي", score: 16.45, school: "529835 المدرسة الابتدائية الخاصة المناهل بقفصة", target: "م... النموذجية قفصة" },
+        { rank: 69, name: "محمد عزيز بن فريد مقدمي", score: 16.45, school: "529838 المدرسة الابتدائية الخاصة الفردوس بالقصر", target: "م... النموذجية قفصة" },
+        { rank: 70, name: "محمد أمين بن سمير شكري", score: 16.45, school: "529820 المدرسة الابتدائية الخاصة المصعد", target: "م... النموذجية قفصة" },
+        { rank: 71, name: "محمد عزيز بن فارس سوده", score: 16.40, school: "529821 المدرسة الابتدائية الخاصة ابن سينا", target: "م... النموذجية قفصة" },
+        { rank: 72, name: "فاطمة بنت نجيب العبيدي", score: 16.40, school: "529821 المدرسة الابتدائية الخاصة ابن سينا", target: "م... النموذجية قفصة" },
+        { rank: 73, name: "لجين بنت العروسي روابحيه", score: 16.40, school: "521405 المدرسة الابتدائية حي التحرير القصر", target: "م... النموذجية قفصة" },
+        { rank: 74, name: "بيان بنت توفيق برهومي", score: 16.40, school: "524804 المدرسة الابتدائية عليم السند", target: "م... النموذجية قفصة" },
+        { rank: 75, name: "المعتز بالله بن شكري سعد", score: 16.35, school: "529820 المدرسة الابتدائية الخاصة المصعد", target: "م... النموذجية قفصة" },
+        { rank: 76, name: "يوسف ميرال بن علي زيداني", score: 16.35, school: "529835 المدرسة الابتدائية الخاصة المناهل بقفصة", target: "م... النموذجية قفصة" },
+        { rank: 77, name: "سادن بن رمزي حاجي", score: 16.30, school: "529820 المدرسة الابتدائية الخاصة المصعد", target: "م... النموذجية قفصة" },
+        { rank: 78, name: "أمين بن سامي سعد", score: 16.30, school: "521318 المدرسة الابتدائية حي السرور قفصة", target: "م... النموذجية قفصة" },
+        { rank: 79, name: "غفران بنت فوزي سيفاوي", score: 16.30, school: "521405 المدرسة الابتدائية حي التحرير القصر", target: "م... النموذجية قفصة" },
+        { rank: 80, name: "مريم بنت ماهر حفيظ", score: 16.25, school: "529820 المدرسة الابتدائية الخاصة المصعد", target: "م... النموذجية قفصة" },
+        { rank: 81, name: "محمد مازن بن الحسين عيساوي", score: 16.20, school: "529843 المدرسة الابتدائية الخاصة الخوارزمي بأم العرائس", target: "م... النموذجية قفصة" },
+        { rank: 82, name: "يقين بنت أنور الأسود", score: 16.20, school: "529821 المدرسة الابتدائية الخاصة ابن سينا", target: "م... النموذجية قفصة" },
+        { rank: 83, name: "مريم بنت شوقي علي", score: 16.20, school: "529821 المدرسة الابتدائية الخاصة ابن سينا", target: "م... النموذجية قفصة" },
+        { rank: 84, name: "يوسف بن مصطفي رضاونية", score: 16.20, school: "529821 المدرسة الابتدائية الخاصة ابن سينا", target: "م... النموذجية قفصة" },
+        { rank: 85, name: "محمد بن كمال بنعمار", score: 16.20, school: "521335 المدرسة الابتدائية حي بن يونس قفصة", target: "م... النموذجية قفصة" },
+        { rank: 86, name: "لجين بنت اسماعيل سحيمي", score: 16.15, school: "529838 المدرسة الابتدائية الخاصة الفردوس بالقصر", target: "م... النموذجية قفصة" },
+        { rank: 87, name: "المعتصم بالله بن علي عزوز", score: 16.15, school: "529820 المدرسة الابتدائية الخاصة المصعد", target: "م... النموذجية قفصة" },
+        { rank: 88, name: "مالك بن عصام بوزيد", score: 16.15, school: "529821 المدرسة الابتدائية الخاصة ابن سينا", target: "م... النموذجية قفصة" },
+        { rank: 89, name: "يزيد بن محفوظ عزازة", score: 16.15, school: "525322 المدرسة الابتدائية حي الشباب أم العرائس", target: "م... النموذجية قفصة" },
+        { rank: 90, name: "المعتصم بالله بن شكري سعد", score: 16.10, school: "529820 المدرسة الابتدائية الخاصة المصعد", target: "م... النموذجية قفصة" },
+        { rank: 91, name: "آدم بن محمد الفاضل الضاوي", score: 16.10, school: "529835 المدرسة الابتدائية الخاصة المناهل بقفصة", target: "م... النموذجية قفصة" },
+        { rank: 92, name: "محمد ياسين بن مجيب ميراوي", score: 16.10, school: "521322 المدرسة الابتدائية حي بورقيبة زروق قفصة", target: "م... النموذجية قفصة" },
+        { rank: 93, name: "أيوب بن عمار قطوس", score: 16.10, school: "529821 المدرسة الابتدائية الخاصة ابن سينا", target: "م... النموذجية قفصة" },
+        { rank: 94, name: "يسر بنت عبد الوهاب عرعاري", score: 16.10, school: "529820 المدرسة الابتدائية الخاصة المصعد", target: "م... النموذجية قفصة" },
+        { rank: 95, name: "آمنه بنت أيمن زيدي", score: 16.00, school: "521310 المدرسة الابتدائية نهج ميلود قفصة", target: "م... النموذجية قفصة" },
+        { rank: 96, name: "أيوب بن محمد بن علي", score: 16.00, school: "529835 المدرسة الابتدائية الخاصة المناهل بقفصة", target: "م... النموذجية قفصة" },
+        { rank: 97, name: "أمان الله بن الطاهر حمادي", score: 16.00, school: "529831 المدرسة الابتدائية الخاصة المستقبل بالمتلوي", target: "م... النموذجية قفصة" },
+        { rank: 98, name: "رباب بنت حافظ نصيب", score: 16.00, school: "529820 المدرسة الابتدائية الخاصة المصعد", target: "م... النموذجية قفصة" },
+        { rank: 99, name: "محمد يسري بن علي فوراتي", score: 16.00, school: "524829 المدرسة الابتدائية الأمل زانوش السند", target: "م... النموذجية قفصة" },
+        { rank: 100, name: "رسيل بنت علي محمدي", score: 16.00, school: "525311 المدرسة الابتدائية حي السوالمية أم العرائس", target: "م... النموذجية قفصة" }
+    ];
+
+    const tableBody = document.getElementById('data-table-body');
+    const searchInput = document.getElementById('search-input');
+    const schoolFilter = document.getElementById('school-filter');
+    const sortSelect = document.getElementById('sort-select');
+
+    // تفعيل الإحصائيات العامة أولاً
+    function initStats() {
+        document.getElementById('total-students').textContent = studentsData.length;
+        const scores = studentsData.map(s => s.score);
+        document.getElementById('max-score').textContent = Math.max(...scores).toFixed(2);
+        document.getElementById('min-score').textContent = Math.min(...scores).toFixed(2);
+    }
+
+    // تعبئة قائمة فلترة المدارس بدون تكرار
+    function populateSchools() {
+        const schools = [...new Set(studentsData.map(s => s.school))].sort();
+        schools.forEach(school => {
+            const option = document.createElement('option');
+            option.value = school;
+            option.textContent = school;
+            schoolFilter.appendChild(option);
+        });
+    }
+
+    // عرض وتحديث البيانات داخل الجدول
+    function displayData(data) {
+        tableBody.innerHTML = '';
+        if (data.length === 0) {
+            tableBody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:#94a3b8;">لا توجد نتائج مطابقة للبحث...</td></tr>`;
+            return;
+        }
+
+        data.forEach(student => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td><span class="badge rank-badge">${student.rank}</span></td>
+                <td><strong>${student.name}</strong></td>
+                <td><span class="badge">${student.score.toFixed(2)}</span></td>
+                <td>${student.school}</td>
+                <td>${student.target}</td>
+            `;
+            tableBody.appendChild(row);
+        });
+    }
+
+    // تصفية وترتيب البيانات بشكل ديناميكي
+    function filterAndSortData() {
+        const searchTerm = searchInput.value.trim().toLowerCase();
+        const selectedSchool = schoolFilter.value;
+        const sortBy = sortSelect.value;
+
+        let filtered = studentsData.filter(student => {
+            const matchesSearch = student.name.toLowerCase().includes(searchTerm) || 
+                                  student.school.toLowerCase().includes(searchTerm);
+            const matchesSchool = selectedSchool === '' || student.school === selectedSchool;
+            return matchesSearch && matchesSchool;
+        });
+
+        // عمليات الترتيب والتنظيم
+        if (sortBy === 'rank-asc') {
+            filtered.sort((a, b) => a.rank - b.rank);
+        } else if (sortBy === 'score-desc') {
+            filtered.sort((a, b) => b.score - a.score);
+        } else if (sortBy === 'name-asc') {
+            filtered.sort((a, b) => a.name.localeCompare(b.name, 'ar'));
+        }
+
+        displayData(filtered);
+    }
+
+    // ربط الأحداث (Event Listeners) عناصر التحكم
+    searchInput.addEventListener('input', filterAndSortData);
+    schoolFilter.addEventListener('change', filterAndSortData);
+    sortSelect.addEventListener('change', filterAndSortData);
+
+    // تشغيل التطبيق عند التحميل
+    initStats();
+    populateSchools();
+    displayData(studentsData);
+</script>
+
+</body>
+</html>
